@@ -1,0 +1,195 @@
+$primaryColor: #084887;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body>form {
+    gap: 20px;
+    display: flex;
+    min-width: 300px;
+    margin: 50px auto;
+    width: max-content;
+    flex-direction: column;
+}
+
+
+@mixin element() {
+    border: 1px solid $primaryColor;
+    border-radius: 4px;
+    padding: 7px;
+}
+
+input,
+textarea,
+select {
+    border-color: rgba(0, 0, 0, 0.5);
+    @include element();
+    outline: none;
+
+    &:hover,
+    &:focus {
+        background-color: darken($color: #fff, $amount: 10%);
+    }
+}
+
+.inpGroup {
+    position: relative;
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+
+        &::placeholder{
+            color: transparent;
+        }
+
+        &:focus,
+        &:not(:placeholder-shown) {
+            &~label {
+                background-color: white;
+                font-size: 0.8em;
+                top: -0.5em;                
+            }
+            &::placeholder{
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+
+    label {
+        transition-duration: .3s;
+        border-radius: 5px;
+        position: absolute;
+        left: 7px;
+        top: 7px;
+    }
+}
+
+button,
+.btn {
+    @mixin btnColors($primary, $secondary) {
+        background-color: $primary;
+        color: $secondary;
+    }
+
+    @include btnColors($primaryColor, white);
+    display: inline-block;
+    @include element();
+    cursor: pointer;
+
+    &.secondary {
+        @include btnColors(white, $primaryColor);
+        border-color: $primaryColor;
+    }
+}
+
+.btnGroup {
+    display: flex;
+    gap: 10px;
+
+    &.centered {
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.limited {
+    width: 100%;
+    max-width: 1000px;
+}
+
+header {
+    background-color: $primaryColor;
+
+    .limited {
+        justify-content: space-between;
+        align-items: center;
+        margin-inline: auto;
+        padding: 10px;
+        display: flex;
+
+        &>a {
+            gap: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+
+            img {
+                height: 30px;
+                aspect-ratio: 1/1;
+            }
+        }
+
+        li.secondary a {
+            color: $primaryColor;
+        }
+    }
+}
+
+main {
+    @extend .limited;
+    margin-inline: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        padding: 15px;
+    }
+
+    td {
+        padding: 10px;
+
+        &.center {
+            text-align: center;
+        }
+    }
+
+    tr {
+        transition-duration: 0.3s;
+
+        &:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+#alert {
+    @mixin elementColor($color) {
+        background-color: lighten($color, $amount: 20%);
+        border-color: $color;
+    }
+
+    width: 100%;
+    padding: 10px;
+    max-width: 500px;
+    border: 2px solid;
+    margin: 20px auto;
+    border-radius: 10px;
+
+    &[type=error] {
+        @include elementColor(red);
+    }
+
+    &[type=ok] {
+        @include elementColor(rgb(89, 255, 47));
+    }
+
+    &:not([type=error], [type=ok]) {
+        @include elementColor(gray);
+    }
+}

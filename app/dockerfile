@@ -1,0 +1,10 @@
+FROM php:8.4-apache
+
+WORKDIR /var/www/html
+
+COPY ./public .
+COPY ./private /var/www/private
+
+RUN docker-php-ext-install mysqli
+
+EXPOSE 80
