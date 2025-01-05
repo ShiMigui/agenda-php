@@ -1,0 +1,16 @@
+services:
+  app:
+    build: ./app
+    ports: [ 80:80 ]
+    env_file: [ conf/connection.env ]
+    depends_on: [ db ]
+    volumes:
+      - ./app/private:/var/www/private
+      - ./app/public:/var/www/html
+
+  db:
+    image: mysql:8.0.40-debian
+    env_file: [ conf/db.env ]
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+    expose: [ 3306 ]
