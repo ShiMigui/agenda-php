@@ -43,7 +43,7 @@ select {
     select {
         width: 100%;
 
-        &::placeholder{
+        &::placeholder {
             color: transparent;
         }
 
@@ -52,9 +52,10 @@ select {
             &~label {
                 background-color: white;
                 font-size: 0.8em;
-                top: -0.5em;                
+                top: -0.5em;
             }
-            &::placeholder{
+
+            &::placeholder {
                 color: rgba(0, 0, 0, 0.5);
             }
         }
@@ -71,6 +72,8 @@ select {
 
 button,
 .btn {
+    text-decoration: none;
+
     @mixin btnColors($primary, $secondary) {
         background-color: $primary;
         color: $secondary;
@@ -161,10 +164,10 @@ table {
         &:nth-child(odd) {
             background-color: rgba(0, 0, 0, 0.1);
         }
+    }
 
-        &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
-        }
+    tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.2);
     }
 }
 

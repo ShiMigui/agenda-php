@@ -37,9 +37,14 @@ class Alert
     public static function render()
     {
         if (!self::has()) return;
-        $type = self::getType()->name;
+        $type = self::getType();
         $msg = self::getMessage();
-        echo "<div id='alert' type='$type'>$msg</div>";
+        self::write($msg, $type);
         Alert::clear();
+    }
+
+    public static function write(string $message, AlertType $type = AlertType::none): void
+    {
+        echo "<div id='alert' type='$type->name'>$message</div>";
     }
 }
