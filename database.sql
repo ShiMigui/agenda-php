@@ -1,22 +1,24 @@
 DROP DATABASE IF EXISTS contacts;
 CREATE DATABASE IF NOT EXISTS contacts;
 USE contacts;
+
 CREATE TABLE IF NOT EXISTS client (
     cd_client INT UNSIGNED AUTO_INCREMENT,
     nm_email VARCHAR(255) UNIQUE NOT NULL,
     nm_password VARCHAR(60) NOT NULL,
-    nm_client VARCHAR(255) NOT NULL,
+    nm_client VARCHAR(100) NOT NULL,
     PRIMARY KEY (cd_client)
 );
+
 CREATE TABLE IF NOT EXISTS contact (
     cd_contact INT UNSIGNED,
     cd_client INT UNSIGNED,
-    nm_contact VARCHAR(255),
+    nm_contact VARCHAR(50),
     nm_email VARCHAR(255),
     nm_phone VARCHAR(20),
     nm_note TEXT,
     PRIMARY KEY (cd_client, cd_contact),
-    FOREIGN KEY (cd_client) REFERENCES client(cd_client)
+    FOREIGN KEY (cd_client) REFERENCES client(cd_client) ON DELETE CASCADE
 );
 
 INSERT INTO client (nm_email, nm_password, nm_client)
