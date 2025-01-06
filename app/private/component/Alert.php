@@ -26,7 +26,7 @@ class Alert
 
     public static function getType(): AlertType
     {
-        return AlertType::from($_SESSION['AlertType'] ?? AlertType::none);
+        return AlertType::from($_SESSION['AlertType']);
     }
 
     public static function getMessage(): ?string
@@ -37,7 +37,7 @@ class Alert
     public static function render()
     {
         if (!self::has()) return;
-        $type = self::getType();
+        $type = self::getType()->name;
         $msg = self::getMessage();
         echo "<div id='alert' type='$type'>$msg</div>";
         Alert::clear();

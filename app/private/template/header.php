@@ -3,8 +3,12 @@
         <a href="/"><img src="" alt="">Agenda</a>
         <nav>
             <ul>
-                <li class="btn secondary"><a href="createAccount.php">Create Account</a></li>
-                <li class="btn"><a href="login.php">Login</a></li>
+                <?php if(!Auth::isLogged()): ?>
+                    <li class="btn secondary"><a href="createAccount.php">Create Account</a></li>
+                    <li class="btn"><a href="login.php">Login</a></li>
+                <?php else:?>
+                    <li class="btn"><a href="logout.php">Logout</a></li>
+                <?php endif;?>
             </ul>
         </nav>
     </div>
