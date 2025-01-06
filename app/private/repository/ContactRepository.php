@@ -31,4 +31,10 @@ class ContactRepository
         $result = $stmt->get_result();
         return $result->num_rows > 0 ? $result->fetch_all(MYSQLI_ASSOC) : null;
     }
+
+    public function delete(int $cdContact, int $cdClient): bool{
+        $stmt = self::$conn->prepare("DELETE FROM contact WHERE cd_contact=? AND cd_client=?");
+        $stmt->bind_param('ii', $cdContact, $cdClient);
+        return $stmt->execute() && $stmt->affected_rows > 0;
+    }
 }
