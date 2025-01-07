@@ -188,11 +188,11 @@ table {
         @include elementColor(red);
     }
 
-    &[type=ok] {
+    &[type=success] {
         @include elementColor(rgb(89, 255, 47));
     }
 
-    &:not([type=error], [type=ok]) {
+    &:not([type=error], [type=success]) {
         @include elementColor(gray);
     }
 }

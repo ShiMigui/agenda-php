@@ -3,6 +3,7 @@ require_once '../private/url.php';
 require_once PRIVATE_PATH . 'repository/ClientRepository.php';
 
 $email = '';
+$name = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once PRIVATE_PATH . 'template/head.php';
 ?>
 <form action="register.php" method="post">
-    <div class="inpGroup"><input type="text" minlength="10" maxlength="100" name="name" id="name" placeholder="John Doe" required><label for="name">Name</label></div>
+    <div class="inpGroup"><input type="text" minlength="10" maxlength="100" name="name" id="name" placeholder="John Doe" value="<?= $name ?>" required><label for="name">Name</label></div>
     <div class="inpGroup"><input type="email" maxlength="255" name="email" id="email" placeholder="email@example.com" value="<?= $email ?>" required><label for="email">Email</label></div>
     <div class="inpGroup"><input type="password" minlength="8" name="password" id="password" placeholder="" required><label for="password">Password</label></div>
     <div class="inpGroup"><input type="password" minlength="8" name="passwordRepeat" id="passwordRepeat" placeholder="" required><label for="passwordRepeat">Repeat password</label></div>

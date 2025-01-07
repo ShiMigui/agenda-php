@@ -23,7 +23,7 @@ require_once PRIVATE_PATH . 'template/header.php';
                 <?php foreach ($contacts as $ct):
                     $nm = $ct['nm_contact'];
                     $cd = $ct['cd_contact'];
-                    $link = "ct=$cd&client=$cdClient";
+                    $link = "ct=$cd";
                 ?>
                     <tr>
                         <td><?= $nm ?></td>
@@ -33,9 +33,7 @@ require_once PRIVATE_PATH . 'template/header.php';
                 <?php endforeach; ?>
             </tbody>
         </table>
-    <?php else: ?>
-        <?= Alert::write('No contacts found for this client.') ?>
-    <?php endif; ?>
+    <?php else: ?><?= Alert::write('No contacts found for this client.') ?><?php endif; ?>
 
     <script src="scripts/deleteContact.js"></script>
 </main>

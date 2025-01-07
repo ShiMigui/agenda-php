@@ -22,11 +22,9 @@ if (!Auth::isLogged()) jsonResponse(HTTPCode::NOT_ALLOWED);
 
 try {
     $ct = filter_var($_GET['ct'] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $client = filter_var($_GET['client'] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $client = Auth::getLogin();
 
     if ($ct <= 0 || $client <= 0) throw new Exception('Invalid contact or client ID.');
-
-    if (Auth::getLogin() != $client) jsonResponse(HTTPCode::NOT_ALLOWED);
 
     require_once PRIVATE_PATH . 'repository/ContactRepository.php';
     $repository = ContactRepository::getInstance();
