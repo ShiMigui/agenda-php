@@ -21,13 +21,23 @@ CREATE TABLE IF NOT EXISTS contact (
     FOREIGN KEY (cd_client) REFERENCES client(cd_client) ON DELETE CASCADE
 );
 
-INSERT INTO client (nm_email, nm_password, nm_client)
-VALUES ('example@example.com', 'hashed_password_here', 'John Doe');
+DELIMITER $$
+CREATE PROCEDURE IF NOT EXISTS insert_contact(
+    IN cdClient INT, 
+    IN nmContact VARCHAR(50), 
+    IN nmEmail VARCHAR(255), 
+    IN nmPhone VARCHAR(20), 
+    IN nmNote TEXT
+)
+BEGIN
+    DECLARE cdContact INT;
+    SELECT COALESCE(MAX(cd_contact), 0) + 1 INTO cdContact
+    FROM contact
+    WHERE cd_client = cdClient;
+    
+    INSERT INTO contact (cd_client, cd_contact, nm_contact, nm_email, nm_phone, nm_note)
+    VALUES (cdClient, cdContact, nmContact, nmEmail, nmPhone, nmNote);
 
-INSERT INTO contact (cd_client, cd_contact, nm_contact, nm_email, nm_phone, nm_note) VALUES
-(1, 1, 'Jane Smith', 'janesmith@example.com', '555-1234', 'Contact for John Doe.'),
-(1, 2, 'Bob Johnson', 'bobjohnson@example.com', '555-5678', 'Contact for John Doe.'),
-(1, 3, 'Alice Davis', 'alicedavis@example.com', '555-9012', 'Contact for John Doe.'),
-(1, 4, 'Emily Thompson', 'emilythompson@example.com', '555-3456', 'Contact for John Doe'),
-(1, 5, 'Michael Wilson', 'michaelwilson@example.com', '555-7890', 'Contact for John Doe'),
-(1, 6, 'Sarah Brown', 'sarahbrown@example.com', '555-4321', 'Contact for John Doe');
+    SELECT cdContact AS cd_contact;
+END $$
+DELIMITER ;;

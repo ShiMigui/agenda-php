@@ -8,6 +8,7 @@
                     <li class="btn"><a href="login.php">Login</a></li>
                 <?php else:?>
                     <li class="btn"><a href="logout.php">Logout</a></li>
+                    <li class="btn"><a href="contact.php">New Contact</a></li>
                 <?php endif;?>
             </ul>
         </nav>
