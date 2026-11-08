@@ -1,32 +1,32 @@
 # Agenda PHP
 
-Aplicação web de **agenda de clientes e contatos** em PHP puro com MySQL, empacotada em Docker.
+Web application for a **client and contact address book** in plain PHP with MySQL, packaged in Docker.
 
-## Funcionalidades
+## Features
 
-- Autenticação de usuários (`Auth`)
-- CRUD de clientes e contatos (padrão *Repository*)
-- Alertas de feedback (`Alert`)
-- Conexão com MySQL via `mysqli` (singleton)
-- Imagem Docker com Apache + PHP 8.4
+- User authentication (`Auth`)
+- CRUD for clients and contacts (*Repository* pattern)
+- Feedback alerts (`Alert`)
+- MySQL connection via `mysqli` (singleton)
+- Docker image with Apache + PHP 8.4
 
-## Estrutura
+## Structure
 
 ```
 app/
-├── dockerfile                # Apache + PHP 8.4 + extensão mysqli
-├── private/                  # código da aplicação (fora do docroot)
-│   ├── Auth.php              # autenticação
-│   ├── Connection.php        # conexão com o banco
-│   ├── repository/           # acesso a dados (ClientRepository, ContactRepository)
-│   ├── component/, template/ # componentes e templates HTML
-│   └── trait/TSingleton.php  # padrão singleton
-└── public/                   # docroot (arquivos públicos)
+├── dockerfile                # Apache + PHP 8.4 + mysqli extension
+├── private/                  # application code (outside the docroot)
+│   ├── Auth.php              # authentication
+│   ├── Connection.php        # database connection
+│   ├── repository/           # data access (ClientRepository, ContactRepository)
+│   ├── component/, template/ # HTML components and templates
+│   └── trait/TSingleton.php  # singleton pattern
+└── public/                   # docroot (public files)
 ```
 
-## Executando
+## Running
 
-Configure as variáveis de ambiente do banco (`DB_NAME`, `DB_HOST`, `DB_USER`, `DB_PASS`) e suba com Docker:
+Configure the database environment variables (`DB_NAME`, `DB_HOST`, `DB_USER`, `DB_PASS`) and start with Docker:
 
 ```bash
 docker build -t agenda-php ./app
@@ -35,4 +35,4 @@ docker run -p 8080:80 \
   agenda-php
 ```
 
-Acesse `http://localhost:8080`.
+Access `http://localhost:8080`.
